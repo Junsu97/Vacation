@@ -4,6 +4,7 @@ import kopo.poly.dto.CovidDTO;
 import kopo.poly.service.ICovidService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +19,11 @@ public class CovidRestController {
     private final ICovidService covidService;
 
     @GetMapping("apiCovid")
-    public List<CovidDTO> main()throws Exception{
+    public List<CovidDTO> main(ModelMap model)throws Exception{
         log.info(this.getClass().getName()+"");
 
         List<CovidDTO> covidDTOList = covidService.getCovidRes();
+        model.addAttribute("model",model);
 
         return covidDTOList;
     }
